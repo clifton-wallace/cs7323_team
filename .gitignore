@@ -39,9 +39,6 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/report.html
 
-# Firebase
-GoogleService-Info.plist
-
 # Temporary files
 *.tmp
 *.temp
