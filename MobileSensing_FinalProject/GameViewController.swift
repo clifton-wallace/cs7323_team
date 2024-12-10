@@ -28,6 +28,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     var games: Int = 0 // Number of games played
     
     let gameModel = GameModel() //Model Has Game Logic
+    let scoringModel = ScoringModel() //Model Has Scoring Logic And Score Persistance
     private var handPosePredictor: HandPosePredictor!  //Prediction Class
     
     // Initialize Major UI Elements
@@ -232,25 +233,13 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
 
         let result = gameModel.determineWinner(userGesture: userGesture, cpuGesture: cpuGesture)
         showResult(userGesture: result.userGesture.rawValue, cpuGesture: result.cpuGesture.rawValue, result: result.outcome.rawValue)
-        calcScore(outcome: result.outcome)
+        
+        scoringModel.addGameResult(GameResult(outcome: result.outcome, userGesture: userGesture, cpuGesture: cpuGesture))
+        self.points = scoringModel.currentScore
+        self.games += 1
+        updateScore()
         
         return result
-    }
-    
-    // Calculate Score Based On Outsome
-    func calcScore(outcome: GameOutcome) {
-        var scoreChange : Int = 0
-        
-        if (outcome == GameOutcome.win) {
-            scoreChange = 10
-        }
-        else if (outcome == GameOutcome.lose) {
-            scoreChange = -10
-        }
-            
-        self.points = self.points + scoreChange
-        self.games = self.games + 1
-        updateScore()
     }
        
     //MARK: -- Detection of Hand Pose

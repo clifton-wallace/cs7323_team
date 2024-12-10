@@ -1,14 +1,14 @@
 import Foundation
 
 // Stores Result Of A Game
-struct GameResult {
+struct GameResult: Codable {
     let outcome: GameOutcome
     let userGesture: HandPose
     let cpuGesture: HandPose
 }
 
 // Possible Gestures For Game
-enum HandPose: String, CaseIterable {
+enum HandPose: String, CaseIterable, Codable {
     case rock = "✊"
     case paper = "✋"
     case scissors = "✌️"
@@ -16,7 +16,7 @@ enum HandPose: String, CaseIterable {
 }
 
 // Result Of Game
-enum GameOutcome: String {
+enum GameOutcome: String, Codable {
     case win = "You Win!"
     case lose = "You Lose!"
     case tie = "You Tied"

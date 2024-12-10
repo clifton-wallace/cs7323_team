@@ -66,6 +66,14 @@
                                     <action selector="playButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZcJ-tc-hcU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hM6-LZ-1JZ">
+                                <rect key="frame" x="112" y="801" width="169" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="View Score History"/>
+                                <connections>
+                                    <segue destination="cJk-y2-44a" kind="show" id="nuv-Z2-nK4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -77,6 +85,8 @@
                             <constraint firstItem="QaV-Ag-8Ew" firstAttribute="top" secondItem="4kY-7k-IPN" secondAttribute="bottom" constant="16" id="GK5-U3-aqY"/>
                             <constraint firstItem="vcp-yU-ewr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="HZG-rd-9cG"/>
                             <constraint firstItem="vcp-yU-ewr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Kgc-kx-79q"/>
+                            <constraint firstItem="hM6-LZ-1JZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="U4D-Nd-Yxs"/>
+                            <constraint firstAttribute="bottom" secondItem="hM6-LZ-1JZ" secondAttribute="bottom" constant="16" id="aIT-vV-hfb"/>
                             <constraint firstItem="QaV-Ag-8Ew" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cd8-SR-JbZ"/>
                             <constraint firstItem="4kY-7k-IPN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="j2H-Lx-7Mg"/>
                             <constraint firstItem="4kY-7k-IPN" firstAttribute="top" secondItem="vcp-yU-ewr" secondAttribute="bottom" constant="16" id="qCC-Dy-Tk4"/>
@@ -93,7 +103,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-544.27480916030527" y="-4.2253521126760569"/>
+            <point key="canvasLocation" x="-444" y="-4"/>
+        </scene>
+        <!--Score History View Controller-->
+        <scene sceneID="9AZ-Rp-B4V">
+            <objects>
+                <tableViewController id="cJk-y2-44a" customClass="ScoreHistoryViewController" customModule="MobileSensing_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="G7m-qK-UdP">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="t7j-h8-JoV">
+                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t7j-h8-JoV" id="5ak-jA-mAq">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cJk-y2-44a" id="LTx-Fp-kO7"/>
+                            <outlet property="delegate" destination="cJk-y2-44a" id="Us9-Tc-kKU"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="3b0-LD-lu1"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yyw-7R-I0K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="430" y="-4"/>
         </scene>
     </scenes>
     <resources>
