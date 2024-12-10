@@ -223,7 +223,12 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     // Capture Gestures And Play Game
     func playGame(target: String) -> GameResult {
         let cpuGesture = gameModel.randomHandPose()
-        let userGesture = HandPose(rawValue: target) ?? gameModel.randomHandPose()
+        
+        guard let userGesture = GameModel.MapPose(input: target) else {
+            // Should Not Get Here
+            print("Invalid input. Unable to determine user's hand pose.")
+            return GameResult(outcome: GameOutcome.invalidInput, userGesture: HandPose.unknown, cpuGesture: cpuGesture)
+        }
 
         let result = gameModel.determineWinner(userGesture: userGesture, cpuGesture: cpuGesture)
         showResult(userGesture: result.userGesture.rawValue, cpuGesture: result.cpuGesture.rawValue, result: result.outcome.rawValue)

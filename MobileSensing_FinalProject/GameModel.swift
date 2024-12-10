@@ -12,6 +12,7 @@ enum HandPose: String, CaseIterable {
     case rock = "✊"
     case paper = "✋"
     case scissors = "✌️"
+    case unknown = "☹️"
 }
 
 // Result Of Game
@@ -19,14 +20,15 @@ enum GameOutcome: String {
     case win = "You Win!"
     case lose = "You Lose!"
     case tie = "You Tied"
+    case invalidInput = "ERROR!"
 }
 
 // Contains Logic For Playing The Game
 class GameModel {
         
-    // Randomly Select Hand Position
+    // Randomly Select Hand Position - Do Not Return Unknwon
     func randomHandPose() -> HandPose {
-        return HandPose.allCases.randomElement()!
+        return HandPose.allCases.filter { $0 != .unknown }.randomElement()!
     }
     
     // Determine Game Winner
@@ -45,6 +47,21 @@ class GameModel {
         }
         
         return GameResult(outcome: outcome, userGesture: userGesture, cpuGesture: cpuGesture)
+    }
+    
+    // Map To Enum Because It Has Emojis - ARG
+    static func MapPose(input: String) -> HandPose? {
+        let normalizedInput = input.lowercased()
+        switch normalizedInput {
+        case "rock":
+            return .rock
+        case "paper":
+            return .paper
+        case "scissors":
+            return .scissors
+        default:
+            return .unknown
+        }
     }
 }
 
