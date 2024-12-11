@@ -42,6 +42,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     // Configure UI Elements
     private func setupUI() {
         self.updateScore()
+
     }
     
     // Configure Overlay
@@ -229,10 +230,35 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     func updateScore() {
         let formattedScore = String(format: "%05d", self.points)
         let formattedGames = String(format: "%05d", self.games)
-        
+        if let segueTemplates = self.value(forKey: "storyboardSegueTemplates") as? [NSObject] {
+            for template in segueTemplates {
+                print("Segue template: \(template)")
+            }
+        } else {
+            print("No segue templates found.")
+        }
+
         DispatchQueue.main.async {
             self.pointsLabel?.text = "Score: \(formattedScore)"
             self.gamesPlayedLabel?.text = "Games: \(formattedGames)"
+            
+            if let segueTemplates = self.value(forKey: "storyboardSegueTemplates") as? [NSObject] {
+                for template in segueTemplates {
+                    print("Segue identifier: \(template.value(forKey: "identifier") ?? "No identifier")")
+                }
+            }
+
+            if self.points >= 20{
+                     self.startGame()
+                 }
+        }
+    }
+  
+    
+    func startGame() {
+        print("Game Started")
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "startGameSegue", sender: self)
         }
     }
     

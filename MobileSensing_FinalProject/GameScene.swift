@@ -46,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = CGVector(dx: 0, dy: -9.8) // Default gravity
         
         // Set up the player using an image
-        player = SKSpriteNode(imageNamed: "player") // Use the player image
+        player = SKSpriteNode(imageNamed: "Paper") // Use the player image
         player.size = CGSize(width: 50, height: 50) // Set the size of the player
         player.position = CGPoint(x: size.width / 2, y: size.height / 2)
         player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
