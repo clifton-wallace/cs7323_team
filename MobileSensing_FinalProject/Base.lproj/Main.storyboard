@@ -135,10 +135,10 @@
             </objects>
             <point key="canvasLocation" x="395" y="-36"/>
         </scene>
-        <!--Game View Controller2-->
+        <!--Bonus Game View Controller-->
         <scene sceneID="rBp-OC-8uH">
             <objects>
-                <viewController id="N1f-St-3bx" customClass="GameViewController2" customModule="MobileSensing_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="N1f-St-3bx" customClass="BonusGameViewController" customModule="MobileSensing_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g6N-pn-0tk" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

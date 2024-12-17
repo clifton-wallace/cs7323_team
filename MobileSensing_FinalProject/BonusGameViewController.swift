@@ -8,7 +8,7 @@
 import UIKit
 import SpriteKit
 
-class GameViewController2: UIViewController {
+class BonusGameViewController: UIViewController {
 
     // create instance GameScene with size equal to view controller bounds
     lazy var scene:GameScene = {

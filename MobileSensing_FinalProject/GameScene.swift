@@ -17,6 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score = 0
     var playAgainButton: SKLabelNode!
     var isGameOver = false
+    var isGameStarted = false
     
     // Timer variables to track time for score updates
     var lastUpdateTime: TimeInterval = 0
@@ -67,19 +68,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Add the play again button but hide it initially
         playAgainButton = SKLabelNode(fontNamed: "Arial")
-        playAgainButton.text = "Play Again"
+        playAgainButton.text = "Play!"
         playAgainButton.fontSize = 36
         playAgainButton.fontColor = .green
-        playAgainButton.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        playAgainButton.isHidden = true
+        playAgainButton.position = CGPoint(x: size.width / 2, y: size.height * (2 / 3))
+        playAgainButton.isHidden = false
         addChild(playAgainButton)
         
-        
-        // Play background music
-        playBackgroundMusic()
-        
-        // Start device motion updates
-        startDeviceMotionUpdates()
+        isGameOver = true // Quick Fix So Game Does Not Auto Start
+        physicsWorld.speed = 0
     }
     
     
@@ -161,7 +158,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func update(_ currentTime: TimeInterval) {
-        guard !isGameOver else { return }
+        guard isGameStarted && !isGameOver else { return }
         
         // Track the time elapsed since the last frame
         if lastUpdateTime == 0 {
@@ -196,18 +193,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // Handle touches for jumping and restarting the game
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if isGameOver {
-            for touch in touches {
-                let location = touch.location(in: self)
-                if playAgainButton.contains(location) {
-                    restartGame()
+        for touch in touches {
+            let location = touch.location(in: self)
+            if isGameOver && playAgainButton.contains(location) {
+                isGameStarted = true
+                restartGame()
+            } else if !isGameOver {
+                // Jump logic: Apply an upward impulse to the player
+                if let playerPhysicsBody = player.physicsBody {
+                    playerPhysicsBody.velocity = CGVector(dx: 0, dy: 0) // Reset vertical velocity before applying impulse
+                    playerPhysicsBody.applyImpulse(CGVector(dx: 0, dy: jumpImpulse))
                 }
-            }
-        } else {
-            // Jump logic: Apply an upward impulse to the player
-            if let playerPhysicsBody = player.physicsBody {
-                playerPhysicsBody.velocity = CGVector(dx: 0, dy: 0) // Reset vertical velocity before applying impulse
-                playerPhysicsBody.applyImpulse(CGVector(dx: 0, dy: jumpImpulse))
             }
         }
     }
@@ -243,6 +239,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Restart the game
     func restartGame() {
         isGameOver = false
+        isGameStarted = true
+        
         score = 0
         scoreLabel.text = "Score: \(score)"
         playAgainButton.isHidden = true
@@ -261,5 +259,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Restart background music
         playBackgroundMusic()
+        startDeviceMotionUpdates()
     }
 }
