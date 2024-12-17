@@ -42,6 +42,18 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     // Configure UI Elements
     private func setupUI() {
         self.updateScore()
+        
+        // Add Cheat Button To Start Bonus GAme
+        //Surprisingly Hard To Win Twice In A Row
+        let cheatButton = UIButton(type: .system)
+        cheatButton.frame = CGRect(x: view.bounds.width - 50,
+                                    y: view.bounds.height - 50, 
+                                    width: 50,
+                                    height: 50)
+        cheatButton.setTitle("", for: .normal)
+        cheatButton.backgroundColor = .clear // Invisible button
+        cheatButton.addTarget(self, action: #selector(hiddenButtonTapped), for: .touchUpInside)
+        view.addSubview(cheatButton)
 
     }
     
@@ -169,6 +181,11 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             self.handPoints.removeAll()
             countdown -= 1
         }
+    }
+    
+    // Cheat Button Event Handler
+    @objc func hiddenButtonTapped() {
+        startGame()
     }
     
     // Helper function to display an alert
