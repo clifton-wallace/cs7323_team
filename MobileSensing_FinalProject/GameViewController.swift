@@ -248,13 +248,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
                 }
             }
 
-            if self.points >= 20{
-                     self.startGame()
-                 }
+            // Show Every 2 Consecutive Wins
+            if self.points >= 20 && self.points % 20 == 0 {
+                self.startGame()
+            }
         }
     }
   
-    
+    // Trigger Bonus Game
     func startGame() {
         print("Game Started")
         DispatchQueue.main.async {
