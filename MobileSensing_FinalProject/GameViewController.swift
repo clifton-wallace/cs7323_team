@@ -242,7 +242,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             }
 
             // Show Every 2 Consecutive Wins
-            if self.points >= 0 && self.points % 20 == 0 {
+            if self.points >= 20 && self.points % 20 == 0 {
                 self.startGame()
             }
         }
