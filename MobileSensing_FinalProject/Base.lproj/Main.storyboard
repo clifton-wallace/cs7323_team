@@ -99,11 +99,12 @@
                         <outlet property="gamesPlayedLabel" destination="vcp-yU-ewr" id="m9B-m6-vfl"/>
                         <outlet property="playButton" destination="QaV-Ag-8Ew" id="NDN-eU-mel"/>
                         <outlet property="pointsLabel" destination="aFq-TG-qoS" id="twH-bE-M4K"/>
+                        <segue destination="N1f-St-3bx" kind="presentation" identifier="startGameSegue" id="8pd-H7-6zh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-444" y="-4"/>
+            <point key="canvasLocation" x="-476" y="-4"/>
         </scene>
         <!--Score History View Controller-->
         <scene sceneID="9AZ-Rp-B4V">
@@ -125,14 +126,29 @@
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="cJk-y2-44a" id="LTx-Fp-kO7"/>
-                            <outlet property="delegate" destination="cJk-y2-44a" id="Us9-Tc-kKU"/>
+                            <outlet property="delegate" destination="cJk-y2-44a" id="Rim-Zt-uaQ"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="3b0-LD-lu1"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yyw-7R-I0K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="430" y="-4"/>
+            <point key="canvasLocation" x="395" y="-36"/>
+        </scene>
+        <!--Game View Controller2-->
+        <scene sceneID="rBp-OC-8uH">
+            <objects>
+                <viewController id="N1f-St-3bx" customClass="GameViewController2" customModule="MobileSensing_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g6N-pn-0tk" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="7i0-is-yuD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sU0-PB-yV9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-416" y="818"/>
         </scene>
     </scenes>
     <resources>

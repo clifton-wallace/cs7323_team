@@ -42,6 +42,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     // Configure UI Elements
     private func setupUI() {
         self.updateScore()
+
     }
     
     // Configure Overlay
@@ -156,13 +157,29 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
                 self.shouldPredict = true
             }
             else {
-                timer.invalidate()
-                self.shouldPredict = false
-            }
+                     timer.invalidate()
+                     self.shouldPredict = false
+                     
+                     // Check if hand is detected after countdown finishes
+                if self.handPoints.isEmpty{
+                         self.showNoHandDetectedAlert()
+                    self.resetScreen();
+                     }
+                 }
+            self.handPoints.removeAll()
             countdown -= 1
         }
     }
     
+    // Helper function to display an alert
+    func showNoHandDetectedAlert() {
+        print("DEBUG: Showing alert!") // Debugging log
+        let alert = UIAlertController(title: "No Hand Detected",
+                                       message: "Please ensure your hand is visible to the camera and try again.",
+                                       preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     // MARK: UI Functions
   
     // Reset Overlay Values
@@ -213,10 +230,35 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     func updateScore() {
         let formattedScore = String(format: "%05d", self.points)
         let formattedGames = String(format: "%05d", self.games)
-        
+        if let segueTemplates = self.value(forKey: "storyboardSegueTemplates") as? [NSObject] {
+            for template in segueTemplates {
+                print("Segue template: \(template)")
+            }
+        } else {
+            print("No segue templates found.")
+        }
+
         DispatchQueue.main.async {
             self.pointsLabel?.text = "Score: \(formattedScore)"
             self.gamesPlayedLabel?.text = "Games: \(formattedGames)"
+            
+            if let segueTemplates = self.value(forKey: "storyboardSegueTemplates") as? [NSObject] {
+                for template in segueTemplates {
+                    print("Segue identifier: \(template.value(forKey: "identifier") ?? "No identifier")")
+                }
+            }
+
+            if self.points >= 20{
+                     self.startGame()
+                 }
+        }
+    }
+  
+    
+    func startGame() {
+        print("Game Started")
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "startGameSegue", sender: self)
         }
     }
     
